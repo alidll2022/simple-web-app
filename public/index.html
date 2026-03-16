@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简单 Web 应用</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #666;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #response {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>简单 Web 应用</h1>
+    <p>这是一个基于 Express 的简单 Web 应用，包含前端页面和后端 API 接口。</p>
+    <button onclick="fetchData()">获取 API 数据</button>
+    <div id="response"></div>
+  </div>
+  
+  <script>
+    function fetchData() {
+      fetch('/api/hello')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('response').innerHTML = `
+            <h3>API 响应:</h3>
+            <p>${JSON.stringify(data, null, 2)}</p>
+          `;
+        })
+        .catch(error => {
+          document.getElementById('response').innerHTML = `
+            <h3>错误:</h3>
+            <p>${error.message}</p>
+          `;
+        });
+    }
+  </script>
+</body>
+</html>
